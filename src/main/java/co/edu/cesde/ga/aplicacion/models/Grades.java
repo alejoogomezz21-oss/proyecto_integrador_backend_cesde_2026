@@ -1,14 +1,14 @@
 package co.edu.cesde.ga.aplicacion.models;
 
-public class grades {
+public class Grades {
     private Long gradeId;
     private Long groupSubjectId;
     private Long studentId;
     private Double finalScore;
     private String observation;
 
-    public grades() {}
-    public grades(Long gradeId, Long groupSubjectId, Long studentId, Double finalScore, String observation) {
+    public Grades() {}
+    public Grades(Long gradeId, Long groupSubjectId, Long studentId, Double finalScore, String observation) {
         this.gradeId = gradeId; this.groupSubjectId = groupSubjectId;
         this.studentId = studentId; this.finalScore = finalScore; this.observation = observation;
     }

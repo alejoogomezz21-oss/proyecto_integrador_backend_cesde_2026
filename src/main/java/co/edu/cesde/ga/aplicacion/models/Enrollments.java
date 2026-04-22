@@ -1,4 +1,4 @@
-package models;
+package co.edu.cesde.ga.aplicacion.models;
 import java.time.LocalDateTime;
 
 public class Enrollments {

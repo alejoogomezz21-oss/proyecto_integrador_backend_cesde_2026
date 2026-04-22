@@ -1,15 +1,15 @@
 package co.edu.cesde.ga.aplicacion.models;
 
 
-public class person {
+public class Person {
     protected String firstName; // first_name
     protected String lastName;  // last_name
     protected String documentNumber; // document_number
     protected String code; // code
 
-    public person() {}
+    public Person() {}
 
-    public person(String firstName, String lastName, String documentNumber, String code) {
+    public Person(String firstName, String lastName, String documentNumber, String code) {
         this.firstName = firstName;
         this.lastName = lastName;
         this.documentNumber = documentNumber;
