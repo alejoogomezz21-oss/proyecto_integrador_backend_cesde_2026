@@ -1,30 +1,27 @@
 package co.edu.cesde.ga.aplicacion.models;
-import java.time.LocalDateTime;
 
-public class Enrollments {
+import java.time.LocalDate;
+
+public class Enrollments { // Asegúrate que sea plural
     private Long enrollmentId;
     private Long studentId;
-    private Long groupId;
+    private Long subjectId;
     private Long periodId;
+    private LocalDate enrollmentDate;
     private String status;
-    private LocalDateTime enrolledAt;
 
     public Enrollments() {}
-    public Enrollments(Long enrollmentId, Long studentId, Long groupId, Long periodId, String status, LocalDateTime enrolledAt) {
-        this.enrollmentId = enrollmentId; this.studentId = studentId;
-        this.groupId = groupId; this.periodId = periodId;
-        this.status = status; this.enrolledAt = enrolledAt;
+
+    public Enrollments(Long enrollmentId, Long studentId, Long subjectId, Long periodId, LocalDate enrollmentDate, String status) {
+        this.enrollmentId = enrollmentId;
+        this.studentId = studentId;
+        this.subjectId = subjectId;
+        this.periodId = periodId;
+        this.enrollmentDate = enrollmentDate;
+        this.status = status;
     }
+
+    // Getters indispensables para que el Impl no saque error
     public Long getEnrollmentId() { return enrollmentId; }
-    public void setEnrollmentId(Long enrollmentId) { this.enrollmentId = enrollmentId; }
     public Long getStudentId() { return studentId; }
-    public void setStudentId(Long studentId) { this.studentId = studentId; }
-    public Long getGroupId() { return groupId; }
-    public void setGroupId(Long groupId) { this.groupId = groupId; }
-    public Long getPeriodId() { return periodId; }
-    public void setPeriodId(Long periodId) { this.periodId = periodId; }
-    public String getStatus() { return status; }
-    public void setStatus(String status) { this.status = status; }
-    public LocalDateTime getEnrolledAt() { return enrolledAt; }
-    public void setEnrolledAt(LocalDateTime enrolledAt) { this.enrolledAt = enrolledAt; }
 }

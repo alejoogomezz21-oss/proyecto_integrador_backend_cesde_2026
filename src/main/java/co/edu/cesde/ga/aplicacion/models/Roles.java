@@ -1,9 +1,9 @@
 package co.edu.cesde.ga.aplicacion.models;
 
 public class Roles {
-    private Long roleId; // role_id
-    private String name; // name
-    private String description; // description
+    private Long roleId;
+    private String name;
+    private String description;
 
     public Roles() {}
 
@@ -13,12 +13,28 @@ public class Roles {
         this.description = description;
     }
 
-    public Long getRoleId() { return roleId; }
-    public void setRoleId(Long roleId) { this.roleId = roleId; }
+    // Getters y Setters (Indispensables para que el repositorio no saque error)
+    public Long getRoleId() {
+        return roleId;
+    }
 
-    public String getName() { return name; }
-    public void setName(String name) { this.name = name; }
+    public void setRoleId(Long roleId) {
+        this.roleId = roleId;
+    }
 
-    public String getDescription() { return description; }
-    public void setDescription(String description) { this.description = description; }
+    public String getName() {
+        return name;
+    }
+
+    public void setName(String name) {
+        this.name = name;
+    }
+
+    public String getDescription() {
+        return description;
+    }
+
+    public void setDescription(String description) {
+        this.description = description;
+    }
 }
