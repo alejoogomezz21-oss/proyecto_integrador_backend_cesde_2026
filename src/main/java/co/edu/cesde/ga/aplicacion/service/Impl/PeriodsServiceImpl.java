@@ -9,20 +9,36 @@ public class PeriodsServiceImpl implements PeriodsService {
 
     private final PeriodsRepository periodsRepository;
 
-    // Inyección por constructor para conectar con el Repository
+
     public PeriodsServiceImpl(PeriodsRepository periodsRepository) {
         this.periodsRepository = periodsRepository;
     }
 
     @Override
     public void createPeriod(Periods period) {
-        // Aquí podrías validar que las fechas no se crucen, por ejemplo
+
+        if (period.getName() == null || period.getName().trim().isEmpty()) {
+            throw new co.edu.cesde.ga.aplicacion.exceptions.ValidacionDatosException("El nombre del periodo es obligatorio.");
+        }
+
+        // 2. Validar fechas (que no sean nulas y que el inicio sea antes del fin)
+        if (period.getStartDate() == null) {
+            throw new co.edu.cesde.ga.aplicacion.exceptions.ValidacionDatosException("La fecha de inicio es obligatoria.");
+        }
+        if (period.getEndDate() == null) {
+            throw new co.edu.cesde.ga.aplicacion.exceptions.ValidacionDatosException("La fecha de fin es obligatoria.");
+        }
+        if (period.getEndDate().isBefore(period.getStartDate())) {
+            throw new co.edu.cesde.ga.aplicacion.exceptions.ValidacionDatosException("La fecha de fin no puede ser anterior a la fecha de inicio.");
+        }
         periodsRepository.save(period);
     }
 
     @Override
     public Periods getPeriodById(Long id) {
-        return periodsRepository.findById(id).orElse(null);
+
+        return periodsRepository.findById(id)
+                .orElseThrow(() -> new co.edu.cesde.ga.aplicacion.exceptions.ObjetoNoEncontradoException("No se encontró el periodo con ID: " + id));
     }
 
     @Override

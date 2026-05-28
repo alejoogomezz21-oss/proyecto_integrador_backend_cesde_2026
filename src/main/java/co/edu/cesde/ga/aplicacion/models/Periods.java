@@ -17,4 +17,38 @@ public class Periods {
         this.endDate = endDate;
     }
 
+    // Getters y Setters para name
+    public String getName() {
+        return name;
+    }
+
+    public void setName(String name) {
+        this.name = name;
+    }
+
+    public Long getPeriodId() {
+        return periodId;
+    }
+
+    public void setPeriodId(Long periodId) {
+        this.periodId = periodId;
+    }
+
+    // Getters y Setters para startDate
+    public java.time.LocalDate getStartDate() {
+        return startDate;
+    }
+
+    public void setStartDate(java.time.LocalDate startDate) {
+        this.startDate = startDate;
+    }
+
+    // Getters y Setters para endDate
+    public java.time.LocalDate getEndDate() {
+        return endDate;
+    }
+
+    public void setEndDate(java.time.LocalDate endDate) {
+        this.endDate = endDate;
+    }
 }

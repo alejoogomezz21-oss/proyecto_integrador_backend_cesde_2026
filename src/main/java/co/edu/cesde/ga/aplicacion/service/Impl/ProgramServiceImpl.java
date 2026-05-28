@@ -15,7 +15,15 @@ public class ProgramServiceImpl implements ProgramService {
 
     @Override
     public Programs createProgram(Programs program) {
-        // Aquí podrías validar que el código no esté vacío antes de guardar
+
+        if (program.getName() == null || program.getName().trim().isEmpty()) {
+            throw new co.edu.cesde.ga.aplicacion.exceptions.ValidacionDatosException("El nombre del programa es obligatorio.");
+        }
+
+        if (program.getCode() == null || program.getCode().trim().isEmpty()) {
+            throw new co.edu.cesde.ga.aplicacion.exceptions.ValidacionDatosException("El código del programa es obligatorio.");
+        }
+
         return programRepository.save(program);
     }
 
