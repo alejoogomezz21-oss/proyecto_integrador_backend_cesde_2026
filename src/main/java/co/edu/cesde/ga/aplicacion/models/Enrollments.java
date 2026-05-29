@@ -1,27 +1,26 @@
 package co.edu.cesde.ga.aplicacion.models;
 
-import java.time.LocalDate;
-
-public class Enrollments { // Asegúrate que sea plural
+public class Enrollments {
     private Long enrollmentId;
-    private Long studentId;
-    private Long subjectId;
-    private Long periodId;
-    private LocalDate enrollmentDate;
-    private String status;
+    private Long userId; // ID del estudiante
+    private Long groupId;
+    private String enrollmentDate; // Puedes usar String o LocalDate según manejen las fechas
 
     public Enrollments() {}
 
-    public Enrollments(Long enrollmentId, Long studentId, Long subjectId, Long periodId, LocalDate enrollmentDate, String status) {
+    public Enrollments(Long enrollmentId, Long userId, Long groupId, String enrollmentDate) {
         this.enrollmentId = enrollmentId;
-        this.studentId = studentId;
-        this.subjectId = subjectId;
-        this.periodId = periodId;
+        this.userId = userId;
+        this.groupId = groupId;
         this.enrollmentDate = enrollmentDate;
-        this.status = status;
     }
 
-    // Getters indispensables para que el Impl no saque error
     public Long getEnrollmentId() { return enrollmentId; }
-    public Long getStudentId() { return studentId; }
+    public void setEnrollmentId(Long enrollmentId) { this.enrollmentId = enrollmentId; }
+    public Long getUserId() { return userId; }
+    public void setUserId(Long userId) { this.userId = userId; }
+    public Long getGroupId() { return groupId; }
+    public void setGroupId(Long groupId) { this.groupId = groupId; }
+    public String getEnrollmentDate() { return enrollmentDate; }
+    public void setEnrollmentDate(String enrollmentDate) { this.enrollmentDate = enrollmentDate; }
 }
