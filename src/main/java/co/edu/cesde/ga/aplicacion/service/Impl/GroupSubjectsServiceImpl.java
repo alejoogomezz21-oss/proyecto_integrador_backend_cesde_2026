@@ -1,6 +1,6 @@
 package co.edu.cesde.ga.aplicacion.service.Impl;
 
-import co.edu.cesde.ga.aplicacion.models.GroupSubjects;
+import co.edu.cesde.ga.aplicacion.models.GroupsSubjects;
 import co.edu.cesde.ga.aplicacion.repository.GroupSubjectsRepository;
 import co.edu.cesde.ga.aplicacion.service.GroupSubjectsService;
 import co.edu.cesde.ga.aplicacion.service.GroupSubjectsService;
@@ -17,23 +17,23 @@ public class GroupSubjectsServiceImpl implements GroupSubjectsService {
     }
 
     @Override
-    public void assignSubjectToGroup(GroupSubjects groupSubject) {
+    public void assignSubjectToGroup(GroupsSubjects groupSubject) {
         // Aquí se guarda la relación entre Grupo, Materia y Docente
         groupSubjectRepository.save(groupSubject);
     }
 
     @Override
-    public GroupSubjects getAssignmentById(Long id) {
+    public GroupsSubjects getAssignmentById(Long id) {
         return groupSubjectRepository.findById(id).orElse(null);
     }
 
     @Override
-    public List<GroupSubjects> getSubjectsByGroup(Long groupId) {
+    public List<GroupsSubjects> getSubjectsByGroup(Long groupId) {
         return groupSubjectRepository.findByGroupId(groupId);
     }
 
     @Override
-    public List<GroupSubjects> getAllAssignments() {
+    public List<GroupsSubjects> getAllAssignments() {
         return groupSubjectRepository.findAll();
     }
 

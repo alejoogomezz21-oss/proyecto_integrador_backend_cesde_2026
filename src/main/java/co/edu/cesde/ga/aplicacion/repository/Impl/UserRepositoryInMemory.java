@@ -24,7 +24,7 @@ public class UserRepositoryInMemory implements UserRepository {
     @Override
     public Optional<Users> findByUsername(String username) {
         return usersList.stream()
-                .filter(u -> u.getUsername().equalsIgnoreCase(username))
+                .filter(u -> u.getName().equalsIgnoreCase(username))
                 .findFirst();
     }
 

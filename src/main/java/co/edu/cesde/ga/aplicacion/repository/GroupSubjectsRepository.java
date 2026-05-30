@@ -1,13 +1,14 @@
 package co.edu.cesde.ga.aplicacion.repository;
 
-import co.edu.cesde.ga.aplicacion.models.GroupSubjects;
+import co.edu.cesde.ga.aplicacion.models.GroupsSubjects;
+
 import java.util.List;
 import java.util.Optional;
 
 public interface GroupSubjectsRepository {
-    void save(GroupSubjects groupSubject);
-    Optional<GroupSubjects> findById(Long id);
-    List<GroupSubjects> findByGroupId(Long groupId);
-    List<GroupSubjects> findAll();
+    void save(GroupsSubjects groupSubject);
+    Optional<GroupsSubjects> findById(Long id);
+    List<GroupsSubjects> findByGroupId(Long groupId);
+    List<GroupsSubjects> findAll();
     void delete(Long id);
 }
