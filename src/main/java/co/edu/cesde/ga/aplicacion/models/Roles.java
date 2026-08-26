@@ -1,8 +1,19 @@
 package co.edu.cesde.ga.aplicacion.models;
 
+import jakarta.persistence.*;
+
+@Entity
+@Table(name = "roles")
 public class Roles {
+
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long roleId;
+
+    @Column(nullable = false, unique = true, length = 50)
     private String name;
+
+    @Column(length = 255)
     private String description;
 
     public Roles() {}
@@ -13,7 +24,7 @@ public class Roles {
         this.description = description;
     }
 
-    // Getters y Setters (Indispensables para que el repositorio no saque error)
+    // Getters y Setters
     public Long getRoleId() {
         return roleId;
     }
