@@ -1,24 +1,9 @@
 package co.edu.cesde.ga.aplicacion.repository;
 
 import co.edu.cesde.ga.aplicacion.models.Periods;
-import java.util.List;
-import java.util.Optional;
+import org.springframework.data.jpa.repository.JpaRepository;
+import org.springframework.stereotype.Repository;
 
-
-public interface PeriodsRepository {
-
-
-    void save(Periods period);
-
-
-    Optional<Periods> findById(Long periodId);
-
-
-    List<Periods> findAll();
-
-
-    void update(Periods period);
-
-
-    void delete(Long periodId);
+@Repository
+public interface PeriodsRepository extends JpaRepository<Periods, Long> {
 }

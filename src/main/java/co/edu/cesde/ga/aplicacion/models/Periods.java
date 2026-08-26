@@ -1,11 +1,24 @@
 package co.edu.cesde.ga.aplicacion.models;
 
+import jakarta.persistence.*;
 import java.time.LocalDate;
 
+@Entity
+@Table(name = "niveles")
 public class Periods {
+
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Column(name = "ID_Nivel")
     private Long periodId;
+
+    @Column(name = "Nombre_Nivel")
     private String name;
+
+    @Column(name = "Fecha_Inicio")
     private LocalDate startDate;
+
+    @Column(name = "Fecha_Fin")
     private LocalDate endDate;
 
     public Periods() {}
@@ -17,15 +30,6 @@ public class Periods {
         this.endDate = endDate;
     }
 
-    // Getters y Setters para name
-    public String getName() {
-        return name;
-    }
-
-    public void setName(String name) {
-        this.name = name;
-    }
-
     public Long getPeriodId() {
         return periodId;
     }
@@ -34,21 +38,27 @@ public class Periods {
         this.periodId = periodId;
     }
 
-    // Getters y Setters para startDate
-    public java.time.LocalDate getStartDate() {
+    public String getName() {
+        return name;
+    }
+
+    public void setName(String name) {
+        this.name = name;
+    }
+
+    public LocalDate getStartDate() {
         return startDate;
     }
 
-    public void setStartDate(java.time.LocalDate startDate) {
+    public void setStartDate(LocalDate startDate) {
         this.startDate = startDate;
     }
 
-    // Getters y Setters para endDate
-    public java.time.LocalDate getEndDate() {
+    public LocalDate getEndDate() {
         return endDate;
     }
 
-    public void setEndDate(java.time.LocalDate endDate) {
+    public void setEndDate(LocalDate endDate) {
         this.endDate = endDate;
     }
 }

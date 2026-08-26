@@ -1,10 +1,9 @@
 package co.edu.cesde.ga.aplicacion.repository;
 
 import co.edu.cesde.ga.aplicacion.models.Programs;
-import java.util.List;
+import org.springframework.data.jpa.repository.JpaRepository;
+import org.springframework.stereotype.Repository;
 
-public interface ProgramRepository {
-    Programs save(Programs program);
-    List<Programs> findAll();
-    Programs findById(Long id);
+@Repository
+public interface ProgramRepository extends JpaRepository<Programs, Long> {
 }

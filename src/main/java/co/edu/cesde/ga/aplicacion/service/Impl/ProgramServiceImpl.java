@@ -2,15 +2,17 @@ package co.edu.cesde.ga.aplicacion.service.Impl;
 
 import co.edu.cesde.ga.aplicacion.models.Programs;
 import co.edu.cesde.ga.aplicacion.repository.ProgramRepository;
-import co.edu.cesde.ga.aplicacion.repository.Impl.ProgramRepositoryInMemory;
 import co.edu.cesde.ga.aplicacion.service.ProgramService;
+import org.springframework.stereotype.Service;
+
 import java.util.List;
 
+@Service
 public class ProgramServiceImpl implements ProgramService {
     private final ProgramRepository programRepository;
 
-    public ProgramServiceImpl() {
-        this.programRepository = new ProgramRepositoryInMemory();
+    public ProgramServiceImpl(ProgramRepository programRepository) {
+        this.programRepository = programRepository;
     }
 
     @Override
