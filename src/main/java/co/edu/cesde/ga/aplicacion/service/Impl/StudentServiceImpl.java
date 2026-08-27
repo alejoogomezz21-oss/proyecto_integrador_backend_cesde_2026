@@ -5,16 +5,16 @@ import co.edu.cesde.ga.aplicacion.exceptions.ValidacionDatosException;
 import co.edu.cesde.ga.aplicacion.models.Students;
 import co.edu.cesde.ga.aplicacion.repository.StudentRepository;
 import co.edu.cesde.ga.aplicacion.service.StudentService;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
 
 import java.util.List;
 
+@Service
 public class StudentServiceImpl implements StudentService {
 
-    private final StudentRepository studentRepository;
-
-    public StudentServiceImpl(StudentRepository studentRepository) {
-        this.studentRepository = studentRepository;
-    }
+    @Autowired
+    private StudentRepository studentRepository;
 
     @Override
     public Students create(Students student) {
@@ -40,7 +40,8 @@ public class StudentServiceImpl implements StudentService {
             throw new ValidacionDatosException("El estado del estudiante es obligatorio.");
         }
 
-        return studentRepository.create(student);
+
+        return studentRepository.save(student);
     }
 
     @Override
@@ -48,9 +49,12 @@ public class StudentServiceImpl implements StudentService {
         if (studentId == null) {
             throw new ValidacionDatosException("El ID del estudiante es obligatorio.");
         }
+
         findById(studentId);
 
-        return studentRepository.delete(studentId);
+
+        studentRepository.deleteById(studentId);
+        return true;
     }
 
     @Override
@@ -68,7 +72,12 @@ public class StudentServiceImpl implements StudentService {
             throw new ValidacionDatosException("El apellido del estudiante es obligatorio.");
         }
 
-        return studentRepository.update(studentUpdate);
+
+        findById(studentUpdate.getStudentId());
+
+
+        studentRepository.save(studentUpdate);
+        return true;
     }
 
     @Override
@@ -77,7 +86,8 @@ public class StudentServiceImpl implements StudentService {
             throw new ValidacionDatosException("El ID del estudiante es obligatorio.");
         }
 
-        Students student = studentRepository.findById(studentId);
+
+        Students student = studentRepository.findById(studentId).orElse(null);
         if (student == null) {
             throw new ObjetoNoEncontradoException("No se encontró un estudiante con el ID: " + studentId);
         }

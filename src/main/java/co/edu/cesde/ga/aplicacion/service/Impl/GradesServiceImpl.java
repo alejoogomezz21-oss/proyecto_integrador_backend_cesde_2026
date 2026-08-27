@@ -5,13 +5,17 @@ import co.edu.cesde.ga.aplicacion.exceptions.ValidacionDatosException;
 import co.edu.cesde.ga.aplicacion.service.GradesService;
 import co.edu.cesde.ga.aplicacion.models.Grades;
 import co.edu.cesde.ga.aplicacion.repository.GradesRepository;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
 
 import java.util.List;
 
+@Service
 public class GradesServiceImpl implements GradesService {
 
     private final GradesRepository gradesRepository;
 
+    @Autowired
     public GradesServiceImpl(GradesRepository gradesRepository) {
         this.gradesRepository = gradesRepository;
     }
@@ -31,7 +35,8 @@ public class GradesServiceImpl implements GradesService {
             throw new ValidacionDatosException("La nota final es obligatoria.");
         }
 
-        return gradesRepository.create(grade);
+
+        return gradesRepository.save(grade);
     }
 
     @Override
@@ -39,9 +44,11 @@ public class GradesServiceImpl implements GradesService {
         if (gradeId == null) {
             throw new ValidacionDatosException("El ID de la nota es obligatorio.");
         }
+        // Validamos que exista antes de borrar; si no, lanza excepción
         findById(gradeId);
 
-        return gradesRepository.delete(gradeId);
+        gradesRepository.deleteById(gradeId);
+        return true;
     }
 
     @Override
@@ -56,7 +63,13 @@ public class GradesServiceImpl implements GradesService {
             throw new ValidacionDatosException("La nota final es obligatoria.");
         }
 
-        return gradesRepository.update(gradeUpdate);
+        // Verificamos que exista antes de actualizar
+        if (!gradesRepository.existsById(gradeUpdate.getGradeId())) {
+            throw new ObjetoNoEncontradoException("No se encontró una nota con el ID: " + gradeUpdate.getGradeId());
+        }
+
+        gradesRepository.save(gradeUpdate);
+        return true;
     }
 
     @Override
@@ -65,12 +78,8 @@ public class GradesServiceImpl implements GradesService {
             throw new ValidacionDatosException("El ID de la nota es obligatorio.");
         }
 
-        Grades grade = gradesRepository.findById(gradeId);
-        if (grade == null) {
-            throw new ObjetoNoEncontradoException("No se encontró una nota con el ID: " + gradeId);
-        }
-
-        return grade;
+        return gradesRepository.findById(gradeId)
+                .orElseThrow(() -> new ObjetoNoEncontradoException("No se encontró una nota con el ID: " + gradeId));
     }
 
     @Override

@@ -3,20 +3,23 @@ package co.edu.cesde.ga.aplicacion.service.Impl;
 import co.edu.cesde.ga.aplicacion.models.Enrollments;
 import co.edu.cesde.ga.aplicacion.repository.EnrollmentsRepository;
 import co.edu.cesde.ga.aplicacion.service.EnrollmentService;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
+
 import java.util.List;
 
+@Service
 public class EnrollmentServiceImpl implements EnrollmentService {
 
     private final EnrollmentsRepository enrollmentRepository;
 
-    // Inyección por constructor para conectar con el Repository
+    @Autowired
     public EnrollmentServiceImpl(EnrollmentsRepository enrollmentRepository) {
         this.enrollmentRepository = enrollmentRepository;
     }
 
     @Override
     public void enrollStudent(Enrollments enrollment) {
-        // Aquí podrías validar que el estudiante no esté ya matriculado en la misma materia
         enrollmentRepository.save(enrollment);
     }
 
@@ -32,11 +35,12 @@ public class EnrollmentServiceImpl implements EnrollmentService {
 
     @Override
     public List<Enrollments> getAllEnrollments() {
-        return (List) enrollmentRepository.findAll();
+        return enrollmentRepository.findAll();
     }
 
     @Override
     public void cancelEnrollment(Long id) {
-        enrollmentRepository.delete(id);
+
+        enrollmentRepository.deleteById(id);
     }
 }

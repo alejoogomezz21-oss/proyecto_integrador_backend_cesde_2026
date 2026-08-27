@@ -1,20 +1,9 @@
 package co.edu.cesde.ga.aplicacion.repository;
 
 import co.edu.cesde.ga.aplicacion.models.Grades;
-import java.util.List;
+import org.springframework.data.jpa.repository.JpaRepository;
+import org.springframework.stereotype.Repository;
 
-public interface GradesRepository {
-
-    Grades create(Grades grades);
-
-    boolean delete(Long gradeId);
-
-    boolean update(Grades gradeUpdate);
-
-    Grades findById(Long gradeId);
-
-    List<Grades> findAll();
-
-    boolean existsById(Long gradeId);
-
+@Repository
+public interface GradesRepository extends JpaRepository<Grades, Long> {
 }

@@ -3,21 +3,23 @@ package co.edu.cesde.ga.aplicacion.service.Impl;
 import co.edu.cesde.ga.aplicacion.models.Users;
 import co.edu.cesde.ga.aplicacion.repository.UserRepository;
 import co.edu.cesde.ga.aplicacion.service.UserService;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
+
 import java.util.List;
 
+@Service
 public class UserServiceImpl implements UserService {
 
-    // Dependencia del repositorio
     private final UserRepository userRepository;
 
-    // Inyección por constructor
+    @Autowired
     public UserServiceImpl(UserRepository userRepository) {
         this.userRepository = userRepository;
     }
 
     @Override
     public void registerUser(Users user) {
-        // Aquí podrías agregar validaciones (ej. si el username ya existe)
         userRepository.save(user);
     }
 
@@ -38,11 +40,11 @@ public class UserServiceImpl implements UserService {
 
     @Override
     public void updateUserInfo(Users user) {
-        userRepository.update(user);
+        userRepository.save(user);
     }
 
     @Override
     public void removeUser(Long id) {
-        userRepository.delete(id);
+        userRepository.deleteById(id);
     }
 }

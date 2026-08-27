@@ -1,13 +1,13 @@
 package co.edu.cesde.ga.aplicacion.repository;
 
 import co.edu.cesde.ga.aplicacion.models.Roles;
-import java.util.List;
+import org.springframework.data.jpa.repository.JpaRepository;
+import org.springframework.stereotype.Repository;
+
 import java.util.Optional;
 
-public interface RolesRepository {
-    void save(Roles role);
-    Optional<Roles> findById(Long roleId);
+@Repository
+public interface RolesRepository extends JpaRepository<Roles, Long> {
+
     Optional<Roles> findByName(String name);
-    List<Roles> findAll();
-    void delete(Long roleId);
 }

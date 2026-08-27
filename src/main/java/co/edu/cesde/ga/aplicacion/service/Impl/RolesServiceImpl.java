@@ -3,20 +3,23 @@ package co.edu.cesde.ga.aplicacion.service.Impl;
 import co.edu.cesde.ga.aplicacion.models.Roles;
 import co.edu.cesde.ga.aplicacion.repository.RolesRepository;
 import co.edu.cesde.ga.aplicacion.service.RolesService;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
+
 import java.util.List;
 
+@Service
 public class RolesServiceImpl implements RolesService {
 
     private final RolesRepository roleRepository;
 
-
+    @Autowired
     public RolesServiceImpl(RolesRepository roleRepository) {
         this.roleRepository = roleRepository;
     }
 
     @Override
     public void createRole(Roles role) {
-
         roleRepository.save(role);
     }
 
@@ -37,6 +40,6 @@ public class RolesServiceImpl implements RolesService {
 
     @Override
     public void deleteRole(Long id) {
-        roleRepository.delete(id);
+        roleRepository.deleteById(id);
     }
 }

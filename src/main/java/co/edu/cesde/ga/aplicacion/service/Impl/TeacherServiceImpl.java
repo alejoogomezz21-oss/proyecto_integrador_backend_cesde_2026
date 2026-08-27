@@ -5,12 +5,17 @@ import co.edu.cesde.ga.aplicacion.exceptions.ValidacionDatosException;
 import co.edu.cesde.ga.aplicacion.models.Teachers;
 import co.edu.cesde.ga.aplicacion.repository.TeacherRepository;
 import co.edu.cesde.ga.aplicacion.service.TeacherService;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
+
 import java.util.List;
 
+@Service
 public class TeacherServiceImpl implements TeacherService {
 
     private final TeacherRepository teacherRepository;
 
+    @Autowired
     public TeacherServiceImpl(TeacherRepository teacherRepository) {
         this.teacherRepository = teacherRepository;
     }
@@ -36,7 +41,7 @@ public class TeacherServiceImpl implements TeacherService {
             throw new ValidacionDatosException("El estado del profesor es obligatorio.");
         }
 
-        return teacherRepository.create(teacher);
+        return teacherRepository.save(teacher);
     }
 
     @Override
@@ -46,7 +51,8 @@ public class TeacherServiceImpl implements TeacherService {
         }
         findById(teacherId);
 
-        return teacherRepository.delete(teacherId);
+        teacherRepository.deleteById(teacherId);
+        return true;
     }
 
     @Override
@@ -64,7 +70,12 @@ public class TeacherServiceImpl implements TeacherService {
             throw new ValidacionDatosException("El apellido del profesor es obligatorio.");
         }
 
-        return teacherRepository.update(teacherUpdate);
+        if (!teacherRepository.existsById(teacherUpdate.getTeacherId())) {
+            throw new ObjetoNoEncontradoException("No se encontró un profesor con el ID: " + teacherUpdate.getTeacherId());
+        }
+
+        teacherRepository.save(teacherUpdate);
+        return true;
     }
 
     @Override
@@ -73,12 +84,8 @@ public class TeacherServiceImpl implements TeacherService {
             throw new ValidacionDatosException("El ID del profesor es obligatorio.");
         }
 
-        Teachers teacher = teacherRepository.findById(teacherId);
-        if (teacher == null) {
-            throw new ObjetoNoEncontradoException("No se encontró un profesor con el ID: " + teacherId);
-        }
-
-        return teacher;
+        return teacherRepository.findById(teacherId)
+                .orElseThrow(() -> new ObjetoNoEncontradoException("No se encontró un profesor con el ID: " + teacherId));
     }
 
     @Override

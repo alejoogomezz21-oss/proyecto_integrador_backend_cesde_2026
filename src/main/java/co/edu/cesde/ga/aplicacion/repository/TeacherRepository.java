@@ -1,23 +1,15 @@
 package co.edu.cesde.ga.aplicacion.repository;
 
 import co.edu.cesde.ga.aplicacion.models.Teachers;
+import org.springframework.data.jpa.repository.JpaRepository;
+import org.springframework.stereotype.Repository;
 
-import java.util.List;
+import java.util.Optional;
 
-public interface TeacherRepository {
-    Teachers create (Teachers teacher);
+@Repository
+public interface TeacherRepository extends JpaRepository<Teachers, Long> {
 
-    boolean delete(Long teacherId);
+    Optional<Teachers> findByDocumentNumber(String documentNumber);
 
-    boolean update(Teachers teacherUpdate);
-
-    Teachers findById(Long teacherId);
-
-    List<Teachers> findAll();
-
-    Teachers findByDocumentNumber(String documentNumber);
     boolean existsByDocumentNumber(String documentNumber);
-
-    boolean existsById(Long teacherId);
 }
-
