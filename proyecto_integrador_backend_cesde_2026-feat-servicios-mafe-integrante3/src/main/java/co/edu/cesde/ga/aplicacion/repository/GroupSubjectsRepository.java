@@ -8,5 +8,7 @@ import java.util.List;
 
 @Repository
 public interface GroupSubjectsRepository extends JpaRepository<GroupsSubjects, Long> {
-    List<GroupsSubjects> findByGroupId(Long groupId);
+    List<GroupsSubjects> findByGroup_Id(Long id);
+    List<GroupsSubjects> findBySubject_Id(Long id);
+
 }

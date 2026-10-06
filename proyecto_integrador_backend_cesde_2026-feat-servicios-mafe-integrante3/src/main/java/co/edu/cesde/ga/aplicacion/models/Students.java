@@ -9,10 +9,12 @@ public class Students {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long studentId;
+    @Column(name = "id")
+    private Long id;
 
-    @Column(name = "user_id")
-    private Long userId;
+    @ManyToOne
+    @JoinColumn(name = "user_id", nullable = false)
+    private Users user;
 
     @Column(nullable = false, unique = true, length = 50)
     private String code;
@@ -37,9 +39,9 @@ public class Students {
     }
 
     // Constructor con parámetros
-    public Students(Long studentId, Long userId, String code, String documentNumber, String firstName, String lastName, LocalDate birthDate, String status) {
-        this.studentId = studentId;
-        this.userId = userId;
+    public Students(Long id, Users user, String code, String documentNumber, String firstName, String lastName, LocalDate birthDate, String status) {
+        this.id = id;
+        this.user = user;
         this.code = code;
         this.documentNumber = documentNumber;
         this.firstName = firstName;
@@ -49,18 +51,18 @@ public class Students {
     }
 
     // Getters y Setters
-    public Long getStudentId() {
-        return studentId;
+    public Long getId() {
+        return id;
     }
-    public void setStudentId(Long studentId) {
-        this.studentId = studentId;
+    public void setId(Long id) {
+        this.id = id;
     }
 
-    public Long getUserId() {
-        return userId;
+    public Users getUser() {
+        return user;
     }
-    public void setUserId(Long userId) {
-        this.userId = userId;
+    public void setUser(Users user) {
+        this.user = user;
     }
 
     public String getCode() {

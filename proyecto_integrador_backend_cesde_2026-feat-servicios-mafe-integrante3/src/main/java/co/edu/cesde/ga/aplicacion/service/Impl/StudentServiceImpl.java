@@ -7,6 +7,7 @@ import co.edu.cesde.ga.aplicacion.repository.StudentRepository;
 import co.edu.cesde.ga.aplicacion.service.StudentService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.web.bind.annotation.RestController;
 
 import java.util.List;
 
@@ -62,7 +63,7 @@ public class StudentServiceImpl implements StudentService {
         if (studentUpdate == null) {
             throw new ValidacionDatosException("El estudiante no puede ser nulo.");
         }
-        if (studentUpdate.getStudentId() == null) {
+        if (studentUpdate.getId() == null) {
             throw new ValidacionDatosException("El ID del estudiante es obligatorio para actualizar.");
         }
         if (studentUpdate.getFirstName() == null || studentUpdate.getFirstName().trim().isEmpty()) {
@@ -73,7 +74,7 @@ public class StudentServiceImpl implements StudentService {
         }
 
 
-        findById(studentUpdate.getStudentId());
+        findById(studentUpdate.getId());
 
 
         studentRepository.save(studentUpdate);

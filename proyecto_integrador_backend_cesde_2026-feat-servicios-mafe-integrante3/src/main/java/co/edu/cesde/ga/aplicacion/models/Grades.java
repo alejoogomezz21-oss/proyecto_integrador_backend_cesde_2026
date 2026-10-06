@@ -8,13 +8,16 @@ public class Grades {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long gradeId;
+    @Column(name = "id")
+    private Long id;
 
-    @Column(name = "group_subject_id", nullable = false)
-    private Long groupSubjectId;
+    @ManyToOne
+    @JoinColumn(name = "group_subject_id", nullable = false)
+    private GroupsSubjects groupSubject;
 
-    @Column(name = "student_id", nullable = false)
-    private Long studentId;
+    @ManyToOne
+    @JoinColumn(name = "student_id", nullable = false)
+    private Students student;
 
     @Column(name = "final_score")
     private Double finalScore;
@@ -24,33 +27,45 @@ public class Grades {
 
     public Grades() {}
 
-    public Grades(Long gradeId, Long groupSubjectId, Long studentId, Double finalScore, String observation) {
-        this.gradeId = gradeId;
-        this.groupSubjectId = groupSubjectId;
-        this.studentId = studentId;
+    public Grades(Long id, GroupsSubjects groupSubject, Students student, Double finalScore, String observation) {
+        this.id = id;
+        this.groupSubject = groupSubject;
+        this.student = student;
         this.finalScore = finalScore;
         this.observation = observation;
     }
 
-    public Long getGradeId() {
-        return gradeId;
+    @Transient // Esto le dice a JPA que no busque estas columnas en la base de datos
+    private Long groupSubjectId;
+
+    @Transient
+    private Long studentId;
+
+    public Long getGroupSubjectId() { return groupSubjectId; }
+    public void setGroupSubjectId(Long groupSubjectId) { this.groupSubjectId = groupSubjectId; }
+
+    public Long getStudentId() { return studentId; }
+    public void setStudentId(Long studentId) { this.studentId = studentId; }
+
+    public Long getId() {
+        return id;
     }
-    public void setGradeId(Long gradeId) {
-        this.gradeId = gradeId;
+    public void setId(Long id) {
+        this.id = id;
     }
 
-    public Long getGroupSubjectId() {
-        return groupSubjectId;
+    public GroupsSubjects getGroupSubject() {
+        return groupSubject;
     }
-    public void setGroupSubjectId(Long groupSubjectId) {
-        this.groupSubjectId = groupSubjectId;
+    public void setGroupSubject(GroupsSubjects groupSubject) {
+        this.groupSubject = groupSubject;
     }
 
-    public Long getStudentId() {
-        return studentId;
+    public Students getStudent() {
+        return student;
     }
-    public void setStudentId(Long studentId) {
-        this.studentId = studentId;
+    public void setStudent(Students student) {
+        this.student = student;
     }
 
     public Double getFinalScore() {

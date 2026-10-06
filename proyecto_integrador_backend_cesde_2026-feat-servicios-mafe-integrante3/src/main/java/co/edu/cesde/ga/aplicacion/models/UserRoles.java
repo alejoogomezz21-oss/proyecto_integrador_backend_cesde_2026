@@ -8,41 +8,44 @@ public class UserRoles {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Column(name = "id")
     private Long id; // Identificador único para la tabla intermedia
 
-    @Column(name = "user_id", nullable = false)
-    private Long userId;
+    @ManyToOne
+    @JoinColumn(name = "user_id", nullable = false)
+    private Users user;
 
-    @Column(name = "role_id", nullable = false)
-    private Long roleId;
+    @ManyToOne
+    @JoinColumn(name = "role_id", nullable = false)
+    private Roles role;
 
     public UserRoles() {
     }
 
-    public UserRoles(Long userId, Long roleId) {
-        this.userId = userId;
-        this.roleId = roleId;
+    public UserRoles(Long id , Users user, Roles role) {
+        this.id = id;
+        this.user = user;
+        this.role = role;
     }
 
     public Long getId() {
         return id;
     }
-
     public void setId(Long id) {
         this.id = id;
     }
 
-    public Long getUserId() {
-        return userId;
+    public Users getUser() {
+        return user;
     }
-    public void setUserId(Long userId) {
-        this.userId = userId;
+    public void setUser(Users user) {
+        this.user = user;
     }
 
-    public Long getRoleId() {
-        return roleId;
+    public Roles getRoleId() {
+        return role;
     }
-    public void setRoleId(Long roleId) {
-        this.roleId = roleId;
+    public void setRole(Roles role) {
+        this.role = role;
     }
 }

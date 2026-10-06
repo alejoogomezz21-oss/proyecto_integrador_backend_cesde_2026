@@ -8,40 +8,43 @@ public class GroupsSubjects {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long groupSubjectId;
+    @Column(name = "id")
+    private Long id;
 
-    @Column(name = "group_id", nullable = false)
-    private Long groupId;
+    @ManyToOne
+    @JoinColumn(name = "group_id", nullable = false)
+    private Groups group;
 
-    @Column(name = "subject_id", nullable = false)
-    private Long subjectId;
+    @ManyToOne
+    @JoinColumn(name = "subject_id", nullable = false)
+    private Subjects subject;
 
     public GroupsSubjects() {}
 
-    public GroupsSubjects(Long groupSubjectId, Long groupId, Long subjectId) {
-        this.groupSubjectId = groupSubjectId;
-        this.groupId = groupId;
-        this.subjectId = subjectId;
+    public GroupsSubjects(Long id, Groups group, Subjects subject) {
+        this.id = id;
+        this.group = group;
+        this.subject = subject;
     }
 
-    public Long getGroupSubjectId() {
-        return groupSubjectId;
+    public Long getId() {
+        return id;
     }
-    public void setGroupSubjectId(Long groupSubjectId) {
-        this.groupSubjectId = groupSubjectId;
-    }
-
-    public Long getGroupId() {
-        return groupId;
-    }
-    public void setGroupId(Long groupId) {
-        this.groupId = groupId;
+    public void setId(Long Id) {
+        this.id = id;
     }
 
-    public Long getSubjectId() {
-        return subjectId;
+    public Groups getGroup() {
+        return group;
     }
-    public void setSubjectId(Long subjectId) {
-        this.subjectId = subjectId;
+    public void setGroup(Groups group) {
+        this.group = group;
+    }
+
+    public Subjects getSubject() {
+        return subject;
+    }
+    public void setSubject(Subjects subject) {
+        this.subject = subject;
     }
 }

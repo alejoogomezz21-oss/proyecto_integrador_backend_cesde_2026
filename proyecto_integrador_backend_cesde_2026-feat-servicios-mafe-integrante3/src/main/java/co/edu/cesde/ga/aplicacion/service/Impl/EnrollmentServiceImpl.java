@@ -30,7 +30,7 @@ public class EnrollmentServiceImpl implements EnrollmentService {
 
     @Override
     public List<Enrollments> getEnrollmentsByStudent(Long studentId) {
-        return enrollmentRepository.findByStudentId(studentId);
+        return enrollmentRepository.findByStudent_Id(studentId);
     }
 
     @Override

@@ -34,7 +34,7 @@ public class GroupsServiceImpl implements GroupsService {
 
     @Override
     public boolean update(Groups groupUpdate) {
-        if (groupUpdate.getGroupId() == null || !groupsRepository.existsById(groupUpdate.getGroupId())) {
+        if (groupUpdate.getId() == null || !groupsRepository.existsById(groupUpdate.getId())) {
             return false;
         }
         groupsRepository.save(groupUpdate);

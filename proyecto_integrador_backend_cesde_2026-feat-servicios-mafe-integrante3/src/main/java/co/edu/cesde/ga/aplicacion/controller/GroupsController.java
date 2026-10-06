@@ -45,7 +45,7 @@ public class GroupsController {
     // PUT /api/groups/{id} -> actualiza un grupo existente
     @PutMapping("/{id}")
     public ResponseEntity<Void> update(@PathVariable Long id, @RequestBody Groups group) {
-        group.setGroupId(id);
+        group.setId(id);
         boolean updated = groupsService.update(group);
         return updated ? ResponseEntity.noContent().build() : ResponseEntity.notFound().build();
     }

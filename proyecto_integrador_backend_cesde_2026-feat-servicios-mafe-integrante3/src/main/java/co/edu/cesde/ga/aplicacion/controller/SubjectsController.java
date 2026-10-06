@@ -45,7 +45,7 @@ public class SubjectsController {
     // PUT /api/subjects/{id} -> actualiza una materia existente
     @PutMapping("/{id}")
     public ResponseEntity<Void> update(@PathVariable Long id, @RequestBody Subjects subject) {
-        subject.setSubjectId(id);
+        subject.setId(id);
         boolean updated = subjectsService.update(subject);
         return updated ? ResponseEntity.noContent().build() : ResponseEntity.notFound().build();
     }

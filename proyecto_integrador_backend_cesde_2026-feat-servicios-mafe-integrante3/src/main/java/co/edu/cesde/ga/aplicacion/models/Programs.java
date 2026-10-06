@@ -3,34 +3,34 @@ package co.edu.cesde.ga.aplicacion.models;
 import jakarta.persistence.*;
 
 @Entity
-@Table(name = "carreras")
+@Table(name = "programs")
 public class Programs {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "ID_Carrera")
-    private Long programId;
+    @Column(name = "id")
+    private Long id;
 
-    @Column(name = "Codigo_Carrera")
+    @Column(name = "Code")
     private String code;
 
-    @Column(name = "Nombre_Carrera")
+    @Column(name = "Name")
     private String name;
 
     public Programs() {}
 
-    public Programs(Long programId, String code, String name) {
-        this.programId = programId;
+    public Programs(Long id, String code, String name) {
+        this.id = id;
         this.code = code;
         this.name = name;
     }
 
-    public Long getProgramId() {
-        return programId;
+    public Long getId() {
+        return id;
     }
 
-    public void setProgramId(Long programId) {
-        this.programId = programId;
+    public void setId(Long id) {
+        this.id = id;
     }
 
     public String getCode() {

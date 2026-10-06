@@ -45,7 +45,7 @@ public class SubjectsServiceImpl implements SubjectsService {
 
     @Override
     public boolean update(Subjects subjectUpdate) {
-        if (subjectUpdate.getSubjectId() != null && subjectsRepository.existsById(subjectUpdate.getSubjectId())) {
+        if (subjectUpdate.getId() != null && subjectsRepository.existsById(subjectUpdate.getId())) {
             subjectsRepository.save(subjectUpdate);
             return true;
         }

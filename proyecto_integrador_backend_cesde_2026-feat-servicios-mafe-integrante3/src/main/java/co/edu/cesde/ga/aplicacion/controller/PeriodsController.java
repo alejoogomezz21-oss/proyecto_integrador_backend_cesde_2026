@@ -45,7 +45,7 @@ public class PeriodsController {
     // PUT /api/periods/{id} -> actualiza un periodo existente
     @PutMapping("/{id}")
     public ResponseEntity<Void> update(@PathVariable Long id, @RequestBody Periods period) {
-        period.setPeriodId(id);
+        period.setId(id);
         periodsService.updatePeriod(period);
         return ResponseEntity.noContent().build();
     }

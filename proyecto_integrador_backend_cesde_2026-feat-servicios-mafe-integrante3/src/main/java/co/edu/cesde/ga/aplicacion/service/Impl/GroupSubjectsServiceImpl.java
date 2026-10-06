@@ -30,7 +30,7 @@ public class GroupSubjectsServiceImpl implements GroupSubjectsService {
 
     @Override
     public List<GroupsSubjects> getSubjectsByGroup(Long groupId) {
-        return groupSubjectRepository.findByGroupId(groupId);
+        return groupSubjectRepository.findByGroup_Id(groupId);
     }
 
     @Override

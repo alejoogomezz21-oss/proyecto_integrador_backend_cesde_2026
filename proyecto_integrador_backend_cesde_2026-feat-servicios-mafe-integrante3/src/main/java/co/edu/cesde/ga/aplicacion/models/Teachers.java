@@ -1,6 +1,7 @@
 package co.edu.cesde.ga.aplicacion.models;
 
 import jakarta.persistence.*;
+import org.hibernate.mapping.UnionSubclass;
 
 @Entity
 @Table(name = "teachers")
@@ -8,10 +9,12 @@ public class Teachers {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Column(name = "id")
     private Long teacherId;
 
-    @Column(name = "user_id")
-    private Long userId;
+    @ManyToOne
+    @JoinColumn(name = "user_id", nullable = false)
+    private Users user;
 
     @Column(nullable = false, unique = true, length = 50)
     private String code;
@@ -31,9 +34,9 @@ public class Teachers {
     public Teachers() {
     }
 
-    public Teachers(Long teacherId, Long userId, String code, String documentNumber, String firstName, String lastName, String status) {
+    public Teachers(Long teacherId, Users user, String code, String documentNumber, String firstName, String lastName, String status) {
         this.teacherId = teacherId;
-        this.userId = userId;
+        this.user = user;
         this.code = code;
         this.documentNumber = documentNumber;
         this.firstName = firstName;
@@ -49,11 +52,11 @@ public class Teachers {
         this.teacherId = teacherId;
     }
 
-    public Long getUserId() {
-        return userId;
+    public Users getUser() {
+        return user;
     }
-    public void setUserId(Long userId) {
-        this.userId = userId;
+    public void setUser(Users user) {
+        this.user = user;
     }
 
     public String getCode() {

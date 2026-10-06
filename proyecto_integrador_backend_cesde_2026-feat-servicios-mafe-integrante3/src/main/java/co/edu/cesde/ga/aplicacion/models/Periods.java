@@ -4,38 +4,38 @@ import jakarta.persistence.*;
 import java.time.LocalDate;
 
 @Entity
-@Table(name = "niveles")
+@Table(name = "periods")
 public class Periods {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "ID_Nivel")
-    private Long periodId;
+    @Column(name = "id")
+    private Long id;
 
-    @Column(name = "Nombre_Nivel")
+    @Column(name = "name")
     private String name;
 
-    @Column(name = "Fecha_Inicio")
+    @Column(name = "start_date")
     private LocalDate startDate;
 
-    @Column(name = "Fecha_Fin")
+    @Column(name = "end_date")
     private LocalDate endDate;
 
     public Periods() {}
 
-    public Periods(Long periodId, String name, LocalDate startDate, LocalDate endDate) {
-        this.periodId = periodId;
+    public Periods(Long id, String name, LocalDate startDate, LocalDate endDate) {
+        this.id = id;
         this.name = name;
         this.startDate = startDate;
         this.endDate = endDate;
     }
 
-    public Long getPeriodId() {
-        return periodId;
+    public Long getId() {
+        return id;
     }
 
-    public void setPeriodId(Long periodId) {
-        this.periodId = periodId;
+    public void setId(Long id) {
+        this.id = id;
     }
 
     public String getName() {

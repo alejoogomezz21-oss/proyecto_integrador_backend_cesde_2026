@@ -55,7 +55,7 @@ public class UsersController {
     // PUT /api/users/{id} -> actualiza los datos de un usuario
     @PutMapping("/{id}")
     public ResponseEntity<Void> update(@PathVariable Long id, @RequestBody Users user) {
-        user.setUserId(id);
+        user.setId(id);
         userService.updateUserInfo(user);
         return ResponseEntity.noContent().build();
     }

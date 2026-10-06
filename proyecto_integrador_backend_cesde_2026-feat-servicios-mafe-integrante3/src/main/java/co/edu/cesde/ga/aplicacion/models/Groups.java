@@ -8,36 +8,39 @@ public class Groups {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long groupId;
+    @Column(name = "id")
+    private Long id;
 
     @Column(nullable = false, unique = true, length = 50)
     private String code;
 
-    @Column(name = "program_id", nullable = false)
-    private Long programId;
+    @ManyToOne
+    @JoinColumn(name = "program_id", nullable = false)
+    private Programs program;
 
-    @Column(name = "period_id", nullable = false)
-    private Long periodId;
+    @ManyToOne
+    @JoinColumn(name = "period_id", nullable = false)
+    private Periods period;
 
     @Column(length = 50)
     private String shift;
 
     public Groups() {}
 
-    public Groups(Long groupId, String code, Long programId, Long periodId, String shift) {
-        this.groupId = groupId;
+    public Groups(Long id, String code, Programs program, Periods period, String shift) {
+        this.id = id;
         this.code = code;
-        this.programId = programId;
-        this.periodId = periodId;
+        this.program = program;
+        this.period = period;
         this.shift = shift;
     }
 
     // Getters y Setters
-    public Long getGroupId() {
-        return groupId;
+    public Long getId() {
+        return id;
     }
-    public void setGroupId(Long groupId) {
-        this.groupId = groupId;
+    public void setId(Long id) {
+        this.id = id;
     }
 
     public String getCode() {
@@ -47,18 +50,18 @@ public class Groups {
         this.code = code;
     }
 
-    public Long getProgramId() {
-        return programId;
+    public Programs getProgram() {
+        return program;
     }
-    public void setProgramId(Long programId) {
-        this.programId = programId;
+    public void setProgram(Programs program) {
+        this.program = program;
     }
 
-    public Long getPeriodId() {
-        return periodId;
+    public Periods getPeriod() {
+        return period;
     }
-    public void setPeriodId(Long periodId) {
-        this.periodId = periodId;
+    public void setPeriod(Periods period) {
+        this.period = period;
     }
 
     public String getShift() {

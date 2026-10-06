@@ -2,6 +2,10 @@ package co.edu.cesde.ga.aplicacion.service.Impl;
 
 import co.edu.cesde.ga.aplicacion.exceptions.ObjetoNoEncontradoException;
 import co.edu.cesde.ga.aplicacion.exceptions.ValidacionDatosException;
+import co.edu.cesde.ga.aplicacion.models.GroupsSubjects;
+import co.edu.cesde.ga.aplicacion.models.Students;
+import co.edu.cesde.ga.aplicacion.repository.GroupSubjectsRepository;
+import co.edu.cesde.ga.aplicacion.repository.StudentRepository;
 import co.edu.cesde.ga.aplicacion.service.GradesService;
 import co.edu.cesde.ga.aplicacion.models.Grades;
 import co.edu.cesde.ga.aplicacion.repository.GradesRepository;
@@ -16,7 +20,14 @@ public class GradesServiceImpl implements GradesService {
     private final GradesRepository gradesRepository;
 
     @Autowired
+    private GroupSubjectsRepository groupSubjectsRepository; // En minúscula
+
+    @Autowired
+    private StudentRepository studentsRepository;
+
+    @Autowired
     public GradesServiceImpl(GradesRepository gradesRepository) {
+
         this.gradesRepository = gradesRepository;
     }
 
@@ -25,6 +36,7 @@ public class GradesServiceImpl implements GradesService {
         if (grade == null) {
             throw new ValidacionDatosException("La nota no puede ser nula.");
         }
+
         if (grade.getGroupSubjectId() == null) {
             throw new ValidacionDatosException("El ID de la materia del grupo es obligatorio.");
         }
@@ -35,6 +47,17 @@ public class GradesServiceImpl implements GradesService {
             throw new ValidacionDatosException("La nota final es obligatoria.");
         }
 
+        // 1. Buscar el GroupSubject existente en la BD
+        GroupsSubjects managedGroupSubject = groupSubjectsRepository.findById(grade.getGroupSubjectId())
+                .orElseThrow(() -> new ValidacionDatosException("El GroupSubject especificado no existe."));
+
+        // 2. Buscar el Student existente en la BD
+        Students managedStudent = studentsRepository.findById(grade.getStudentId())
+                .orElseThrow(() -> new ValidacionDatosException("El estudiante especificado no existe."));
+
+        // 3. Asignar las entidades gestionadas al objeto grade
+        grade.setGroupSubject(managedGroupSubject);
+        grade.setStudent(managedStudent);
 
         return gradesRepository.save(grade);
     }
@@ -56,7 +79,7 @@ public class GradesServiceImpl implements GradesService {
         if (gradeUpdate == null) {
             throw new ValidacionDatosException("La nota no puede ser nula.");
         }
-        if (gradeUpdate.getGradeId() == null) {
+        if (gradeUpdate.getId() == null) {
             throw new ValidacionDatosException("El ID de la nota es obligatorio para actualizar.");
         }
         if (gradeUpdate.getFinalScore() == null) {
@@ -64,8 +87,8 @@ public class GradesServiceImpl implements GradesService {
         }
 
         // Verificamos que exista antes de actualizar
-        if (!gradesRepository.existsById(gradeUpdate.getGradeId())) {
-            throw new ObjetoNoEncontradoException("No se encontró una nota con el ID: " + gradeUpdate.getGradeId());
+        if (!gradesRepository.existsById(gradeUpdate.getId())) {
+            throw new ObjetoNoEncontradoException("No se encontró una nota con el ID: " + gradeUpdate.getId());
         }
 
         gradesRepository.save(gradeUpdate);

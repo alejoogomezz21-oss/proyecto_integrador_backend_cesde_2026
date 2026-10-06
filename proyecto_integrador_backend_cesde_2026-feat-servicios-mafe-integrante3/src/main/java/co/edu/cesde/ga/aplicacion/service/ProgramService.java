@@ -6,4 +6,7 @@ import java.util.List;
 public interface ProgramService {
     Programs createProgram(Programs program);
     List<Programs> getAllPrograms();
+    Programs findById(Long id);
+    boolean update(Programs program);
+    boolean delete(Long id);
 }

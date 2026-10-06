@@ -45,7 +45,7 @@ public class GradesController {
     // PUT /api/grades/{id} -> actualiza una nota existente
     @PutMapping("/{id}")
     public ResponseEntity<Void> update(@PathVariable Long id, @RequestBody Grades grade) {
-        grade.setGradeId(id);
+        grade.setId(id);
         boolean updated = gradesService.update(grade);
         return updated ? ResponseEntity.noContent().build() : ResponseEntity.notFound().build();
     }

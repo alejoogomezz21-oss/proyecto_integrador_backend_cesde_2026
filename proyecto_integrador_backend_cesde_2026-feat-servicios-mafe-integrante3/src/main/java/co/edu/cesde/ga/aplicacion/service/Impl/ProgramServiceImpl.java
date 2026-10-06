@@ -33,4 +33,27 @@ public class ProgramServiceImpl implements ProgramService {
     public List<Programs> getAllPrograms() {
         return programRepository.findAll();
     }
+
+    @Override
+    public Programs findById(Long id) {
+        return programRepository.findById(id).orElse(null);
+    }
+
+    @Override
+    public boolean update(Programs program) {
+        if (programRepository.existsById(program.getId())) {
+            programRepository.save(program);
+            return true;
+        }
+        return false;
+    }
+
+    @Override
+    public boolean delete(Long id) {
+        if (programRepository.existsById(id)) {
+            programRepository.deleteById(id);
+            return true;
+        }
+        return false;
+    }
 }

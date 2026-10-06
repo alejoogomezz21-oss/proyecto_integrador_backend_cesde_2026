@@ -9,16 +9,20 @@ public class Enrollments {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long enrollmentId;
+    @Column(name = "id")
+    private Long id;
 
-    @Column(name = "student_id", nullable = false)
-    private Long studentId;
+    @ManyToOne
+    @JoinColumn(name = "ID_Estudiante", nullable = false)
+    private Students student;
 
-    @Column(name = "subject_id", nullable = false)
-    private Long subjectId;
+    @ManyToOne
+    @JoinColumn(name = "ID_Materia", nullable = false)
+    private Subjects subject;
 
-    @Column(name = "period_id", nullable = false)
-    private Long periodId;
+    @ManyToOne
+    @JoinColumn(name = "ID_Nivel", nullable = false)
+    private Periods period;
 
     @Column(name = "enrollment_date")
     private LocalDate enrollmentDate;
@@ -28,42 +32,42 @@ public class Enrollments {
 
     public Enrollments() {}
 
-    public Enrollments(Long enrollmentId, Long studentId, Long subjectId, Long periodId, LocalDate enrollmentDate, String status) {
-        this.enrollmentId = enrollmentId;
-        this.studentId = studentId;
-        this.subjectId = subjectId;
-        this.periodId = periodId;
+    public Enrollments(Long id, Students student, Subjects subject, Periods period, LocalDate enrollmentDate, String status) {
+        this.id = id;
+        this.student = student;
+        this.subject = subject;
+        this.period = period;
         this.enrollmentDate = enrollmentDate;
         this.status = status;
     }
 
     // Getters y Setters
-    public Long getEnrollmentId() {
-        return enrollmentId;
+    public Long getId() {
+        return id;
     }
-    public void setEnrollmentId(Long enrollmentId) {
-        this.enrollmentId = enrollmentId;
-    }
-
-    public Long getStudentId() {
-        return studentId;
-    }
-    public void setStudentId(Long studentId) {
-        this.studentId = studentId;
+    public void setId(Long id) {
+        this.id = id;
     }
 
-    public Long getSubjectId() {
-        return subjectId;
+    public Students getStudent() {
+        return student;
     }
-    public void setSubjectId(Long subjectId) {
-        this.subjectId = subjectId;
+    public void setStudent(Students student) {
+        this.student = student;
     }
 
-    public Long getPeriodId() {
-        return periodId;
+    public Subjects getSubject() {
+        return subject;
     }
-    public void setPeriodId(Long periodId) {
-        this.periodId = periodId;
+    public void setSubject(Subjects subject) {
+        this.subject = subject;
+    }
+
+    public Periods getPeriod() {
+        return period;
+    }
+    public void setPeriod(Periods period) {
+        this.period = period;
     }
 
     public LocalDate getEnrollmentDate() {

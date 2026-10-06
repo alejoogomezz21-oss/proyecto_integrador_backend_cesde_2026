@@ -8,7 +8,8 @@ public class Roles {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long roleId;
+    @Column(name = "id")
+    private Long id;
 
     @Column(nullable = false, unique = true, length = 50)
     private String name;
@@ -18,19 +19,19 @@ public class Roles {
 
     public Roles() {}
 
-    public Roles(Long roleId, String name, String description) {
-        this.roleId = roleId;
+    public Roles(Long id, String name, String description) {
+        this.id = id;
         this.name = name;
         this.description = description;
     }
 
     // Getters y Setters
-    public Long getRoleId() {
-        return roleId;
+    public Long getId() {
+        return id;
     }
 
-    public void setRoleId(Long roleId) {
-        this.roleId = roleId;
+    public void setId(Long id) {
+        this.id = id;
     }
 
     public String getName() {

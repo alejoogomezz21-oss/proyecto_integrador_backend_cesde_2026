@@ -46,7 +46,7 @@ public class StudentController {
     // PUT /api/students/{id} -> actualiza un estudiante existente
     @PutMapping("/{id}")
     public ResponseEntity<Void> update(@PathVariable Long id, @RequestBody Students student) {
-        student.setStudentId(id);
+        student.setId(id);
         boolean updated = studentService.update(student);
         return updated ? ResponseEntity.noContent().build() : ResponseEntity.notFound().build();
     }

@@ -3,42 +3,43 @@ package co.edu.cesde.ga.aplicacion.models;
 import jakarta.persistence.*;
 
 @Entity
-@Table(name = "materias")
+@Table(name = "subjects")
 public class Subjects {
 
         @Id
         @GeneratedValue(strategy = GenerationType.IDENTITY)
-        @Column(name = "ID_Materia")
-        private Long subjectId;
+        @Column(name = "id")
+        private Long id;
 
-        @Column(name = "Codigo_Materia")
+        @Column(name = "Code")
         private String code;
 
-        @Column(name = "Nombre_Materia")
+        @Column(name = "Name")
         private String name;
 
-        @Column(name = "Creditos")
+        @Column(name = "Credits")
         private Integer credits;
 
-        @Column(name = "ID_Carrera")
-        private Long programId;
+        @ManyToOne
+        @JoinColumn(name = "program_id", nullable = false)
+        private Programs program;
 
         public Subjects() {}
 
-        public Subjects(Long subjectId, String code, String name, Integer credits, Long programId) {
-                this.subjectId = subjectId;
+        public Subjects(Long id, String code, String name, Integer credits, Programs program) {
+                this.id = id;
                 this.code = code;
                 this.name = name;
                 this.credits = credits;
-                this.programId = programId;
+                this.program = program;
         }
 
-        public Long getSubjectId() {
-                return subjectId;
+        public Long getId() {
+                return id;
         }
 
-        public void setSubjectId(Long subjectId) {
-                this.subjectId = subjectId;
+        public void setId(Long id) {
+                this.id = id;
         }
 
         public String getCode() {
@@ -65,11 +66,11 @@ public class Subjects {
                 this.credits = credits;
         }
 
-        public Long getProgramId() {
-                return programId;
+        public Programs getProgram() {
+                return program;
         }
 
-        public void setProgramId(Long programId) {
-                this.programId = programId;
+        public void setProgram(Programs program) {
+                this.program = program;
         }
 }
